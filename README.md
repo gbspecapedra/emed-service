@@ -35,7 +35,7 @@ API developed with the main following technologies:
 
 ## 🔖 API Documentation
 
-...
+[OpenAPI Specification](https://app.swaggerhub.com/apis/gisabernardess/emed/1.0.0) to eMED RESTful API.
 
 ## ℹ️ How To Use
 
