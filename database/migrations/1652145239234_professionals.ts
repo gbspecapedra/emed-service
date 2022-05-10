@@ -8,7 +8,7 @@ export default class ProfessionalsSchema extends BaseSchema {
       table.increments('id').primary()
       table.string('type', 8).notNullable()
       table.string('name', 255).notNullable()
-      table.integer('registration_number').notNullable()
+      table.integer('registration_number').unsigned().notNullable()
       table.string('registration_state', 2).notNullable()
       table.string('specialty', 255).notNullable()
       table.string('email', 255).notNullable()

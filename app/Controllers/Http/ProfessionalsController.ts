@@ -1,9 +1,8 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { string } from '@ioc:Adonis/Core/Helpers'
-
 import Professional from 'App/Models/Professional'
 import CreateProfessionalValidator from 'App/Validators/CreateProfessionalValidator'
 
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 export default class ProfessionalsController {
   public async index() {
     return await Professional.all()
@@ -62,8 +61,7 @@ export default class ProfessionalsController {
         })
         .save()
     } catch (error) {
-      console.log(error)
-      response.badRequest(error)
+      response.internalServerError(error)
     }
   }
 
@@ -71,12 +69,12 @@ export default class ProfessionalsController {
     try {
       const { id } = request.params()
 
-      const professional = await Professional.findOrFail(id)
-      if (!professional) return response.status(404).send({ error: 'Professional not found' })
+      const professional = await Professional.find(id)
+      if (!professional) return response.notFound({ message: 'Professional not found' })
 
       return await professional.delete()
     } catch (error) {
-      response.badRequest(error)
+      response.internalServerError(error)
     }
   }
 }

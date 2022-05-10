@@ -7,12 +7,16 @@ export default class AuthController {
   public async login({ request, response, auth }: HttpContextContract) {
     try {
       const { email, password } = request.all()
+
+      const user = await Professional.findBy('email', email)
+      if (!user) return response.notFound({ error: 'User not found!' })
+
       const token = await auth.use('api').attempt(email, password, {
         expiresIn: '24hours',
       })
       return token.toJSON()
     } catch (error) {
-      response.badRequest(error)
+      response.internalServerError(error)
     }
   }
 
@@ -40,7 +44,7 @@ export default class AuthController {
 
       return response.ok({ password: newPassword })
     } catch (error) {
-      return response.badRequest(error)
+      return response.internalServerError(error)
     }
   }
 
