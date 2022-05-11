@@ -1,6 +1,8 @@
-import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeSave, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { DateTime } from 'luxon'
+
+import Attendance from './Attendance'
 
 export default class Professional extends BaseModel {
   @column({ isPrimary: true })
@@ -51,4 +53,10 @@ export default class Professional extends BaseModel {
   public checkPassword(password: string) {
     return Hash.verify(this.password, password)
   }
+
+  @hasMany(() => Attendance, {
+    localKey: 'id',
+    foreignKey: 'professionalId',
+  })
+  public attendances: HasMany<typeof Attendance>
 }

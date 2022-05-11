@@ -1,16 +1,16 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class MedicalRecords extends BaseSchema {
-  protected tableName = 'medical_records'
+export default class Prescriptions extends BaseSchema {
+  protected tableName = 'prescriptions'
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
       table
-        .integer('patient_id')
+        .integer('medical_record_id')
         .unsigned()
         .references('id')
-        .inTable('patients')
+        .inTable('medical_records')
         .onDelete('CASCADE')
       table.text('description', 'longtext').notNullable()
       table.timestamp('created_at', { useTz: true }).notNullable()

@@ -1,6 +1,6 @@
+import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
-import Address from './Address'
+
 import HealthPlan from './HealthPlan'
 
 export default class Patient extends BaseModel {
@@ -13,7 +13,7 @@ export default class Patient extends BaseModel {
   @column()
   public socialNumber: number
 
-  @column()
+  @column.dateTime()
   public birthday: DateTime
 
   @column()
@@ -23,23 +23,43 @@ export default class Patient extends BaseModel {
   public contact: string
 
   @column()
-  public addressId: number
+  public zipcode: string
 
   @column()
-  public healthPlanId: number
+  public street: string
 
   @column()
-  public healthPlanExpiration: DateTime
+  public number?: number
+
+  @column()
+  public complement?: string
+
+  @column()
+  public county: string
+
+  @column()
+  public city: string
+
+  @column()
+  public state: string
+
+  @column()
+  public country: string
+
+  @column()
+  public healthPlanId?: number
+
+  @column.dateTime()
+  public healthPlanExpiration?: DateTime
 
   @column()
   public active: boolean
 
-  @hasOne(() => Address, {
-    localKey: 'addressId',
-    foreignKey: 'id',
-    serializeAs: 'address',
-  })
-  public address: HasOne<typeof Address>
+  @column.dateTime({ autoCreate: true })
+  public createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  public updatedAt: DateTime
 
   @hasOne(() => HealthPlan, {
     localKey: 'healthPlanId',
@@ -47,10 +67,4 @@ export default class Patient extends BaseModel {
     serializeAs: 'healthPlan',
   })
   public healthPlan: HasOne<typeof HealthPlan>
-
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
 }

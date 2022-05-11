@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Appointments extends BaseSchema {
-  protected tableName = 'appointments'
+export default class Attendances extends BaseSchema {
+  protected tableName = 'attendances'
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
@@ -14,14 +14,20 @@ export default class Appointments extends BaseSchema {
         .inTable('patients')
         .onDelete('CASCADE')
       table
+        .integer('medical_record_id')
+        .unsigned()
+        .references('id')
+        .inTable('medical_records')
+        .onDelete('CASCADE')
+      table
         .integer('professional_id')
         .unsigned()
         .references('id')
         .inTable('professionals')
         .onDelete('CASCADE')
-      table.timestamp('date', { useTz: true })
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
+      table.timestamp('date', { useTz: true }).notNullable()
+      table.timestamp('created_at', { useTz: true }).notNullable()
+      table.timestamp('updated_at', { useTz: true }).notNullable()
     })
   }
 

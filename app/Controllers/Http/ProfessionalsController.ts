@@ -15,16 +15,10 @@ export default class ProfessionalsController {
 
   public async create({ request, response }: HttpContextContract) {
     try {
-      const { type, name, registrationNumber, registrationState, specialty, email } =
-        await request.validate(CreateProfessionalValidator)
+      const professional = await request.validate(CreateProfessionalValidator)
 
       return await Professional.create({
-        type,
-        name,
-        registrationNumber,
-        registrationState,
-        specialty,
-        email,
+        ...professional,
         password: string.generateRandom(8),
         active: true,
       })
@@ -37,22 +31,22 @@ export default class ProfessionalsController {
     try {
       const { id, name, specialty, email, oldPassword, password } = request.all()
 
-      const professional = await Professional.find(id)
-      if (!professional) return response.notFound({ message: 'Professional not found' })
+      const professionalExists = await Professional.find(id)
+      if (!professionalExists) return response.notFound({ message: 'Professional not found' })
 
-      if (email && email !== professional.email) {
-        const professionalExists = await Professional.find({ where: { email } })
-        if (professionalExists)
+      if (email && email !== professionalExists.email) {
+        const emailAlreadyExists = await Professional.find({ where: { email } })
+        if (emailAlreadyExists)
           return response.badRequest({
             message: 'There is a professional with this email. Try another one',
           })
       }
 
-      if (oldPassword && !(await professional.checkPassword(oldPassword))) {
+      if (oldPassword && !(await professionalExists.checkPassword(oldPassword))) {
         return response.badRequest({ message: 'Current password does not match' })
       }
 
-      return await professional
+      return await professionalExists
         .merge({
           name,
           specialty,
@@ -69,10 +63,10 @@ export default class ProfessionalsController {
     try {
       const { id } = request.params()
 
-      const professional = await Professional.find(id)
-      if (!professional) return response.notFound({ message: 'Professional not found' })
+      const professionalExists = await Professional.find(id)
+      if (!professionalExists) return response.notFound({ message: 'Professional not found' })
 
-      return await professional.delete()
+      return await professionalExists.merge({ active: false }).save()
     } catch (error) {
       response.internalServerError(error)
     }

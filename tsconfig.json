@@ -11,6 +11,7 @@
     "outDir": "build",
     "rootDir": "./",
     "sourceMap": true,
+    "resolveJsonModule": true,
     "paths": {
       "App/*": [
         "./app/*"

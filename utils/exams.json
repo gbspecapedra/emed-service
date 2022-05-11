@@ -1,0 +1,66 @@
+[
+  {
+    "name": "HEMOGRAMA",
+    "description": "O exame analisa informações específicas sobre os tipos e quantidades dos componentes no sangue, como: glóbulos vermelhos (hemácias); glóbulos brancos (leucócitos), plaquetas (coagulação sanguínea)."
+  },
+  {
+    "name": "GLICEMIA EM JEJUM",
+    "description": "O exame de glicemia em jejum serve para medir o nível da glicose na circulação sanguínea do paciente podendo identificar casos de diabetes e pré diabetes, além de ser importante para o controle das pessoas que já possuem esses diagnósticos."
+  },
+  {
+    "name": "COLESTEROL E TRIGLICERÍDEOS",
+    "description": "O exame mede os níveis de gorduras no sangue que podem ocasionar entupimento dos vasos sanguíneos, causando infarto e AVC (derrame)."
+  },
+  {
+    "name": "UREIA E CREATINA",
+    "description": "Avalia o funcionamento dos rins e identifica alterações de forma precoce, mesmo se assintomático."
+  },
+  {
+    "name": "TGO (AST) E TGP (ALT)",
+    "description": "O exame quantifica as enzimas TGO e TGP e avalia o funcionamento do fígado. Podem estar alteradas na vigência de lesões musculares, doença celíaca, hipotireoidismo, pancreatite e infarto, porém não são específicas para o diagnóstico destas doenças."
+  },
+  {
+    "name": "TSH E T4 LIVRE",
+    "description": "Avalia o funcionamento da glândula tireóide, podendo identificar alterações como hipotireoidismo e hipertireoidismo."
+  },
+  {
+    "name": "ÁCIDO ÚRICO",
+    "description": "Os cristais de ácido úrico podem se acumular nas articulações e nos rins causando gota, cálculos renais e até insuficiência renal. A elevação das dosagens de ácido úrico são frequentemente associadas a hipertensão arterial e problemas cardiovasculares."
+  },
+  {
+    "name": "EXAMES DE URINA",
+    "description": "Este exame serve para analisar de forma microscópica as células, bactérias e cristais que possam estar presentes na urina e causar doenças. Além disso são realizadas dosagens de glicose, bilirrubinas e outras substâncias que auxiliam no diagnóstico de doenças sistêmicas."
+  },
+  {
+    "name": "ELETROCARDIOGRAMA",
+    "description": "O exame de eletrocardiograma consiste em medir a atividade elétrica do coração e serve para diagnosticar a existência de problemas cardíacos."
+  },
+  {
+    "name": "TESTE ERGOMÉTRICO",
+    "description": "O teste ergométrico serve para avaliar o funcionamento do sistema cardiovascular sob estímulo e consiste em o paciente realizar um esforço físico gradual em uma esteira rolante ou bicicleta."
+  },
+  {
+    "name": "ECOCARDIOGRAMA",
+    "description": "O exame consiste em uma ultrassonografia do coração que fornece imagens obtidas através de ondas sonoras e cores que avaliam o tipo de fluxo sanguíneo dentro das câmaras cardíacas."
+  },
+  {
+    "name": "PAPANICOLOU/PREVENTIVO",
+    "description": "É um exame realizado no próprio consultório ginecológico, onde se é coletada uma amostra do material do colo do útero a fim de analisar a natureza das células – e, eventualmente, detectar a presença de alterações."
+  },
+  {
+    "name": "MAMOGRAFIA",
+    "description": "É um exame de imagens das mamas, que são obtidas por meio de radiografia. Ele serve para identificar lesões, nódulos, assimetrias e diagnosticar precocemente o câncer de mamas."
+  },
+  {
+    "name": "ULTRASSONOGRAFIA TRANSVAGINAL",
+    "description": "É um exame de imagem não invasivo, capaz de avaliar o canal vaginal, colo do útero, útero, trompas de Falópio e os ovários da mulher."
+  },
+  {
+    "name": "TOQUE RETAL",
+    "description": "É um exame realizado por meio da introdução do dedo indicador do médico, revestido de luva esterilizada, no ânus do paciente, o que possibilita palpar a porção mais distal do reto (porção final do intestino grosso), assim como a próstata, e avaliar anomalias existentes nesses órgãos."
+  },
+  {
+    "name": "DOSAGEM DE PSA",
+    "description": "O PSA (Antígeno Prostático Específico) é uma glicoproteína produzida primariamente pelas células epiteliais da próstata, secretada no líquido seminal, onde permanece em concentrações elevadas, e em menores concentrações no soro de homens normais. É utilizado como um marcador de câncer de próstata."
+  }
+]

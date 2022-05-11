@@ -1,4 +1,5 @@
 import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+
 import MedicalRecord from './MedicalRecord'
 
 export default class Medicine extends BaseModel {
