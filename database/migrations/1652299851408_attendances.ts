@@ -21,6 +21,7 @@ export default class Attendances extends BaseSchema {
         .onDelete('CASCADE')
       table.timestamp('date', { useTz: true }).notNullable()
       table.string('status', 180).notNullable()
+      table.string('cancellation_reason').nullable()
       table.timestamp('created_at', { useTz: true }).notNullable()
       table.timestamp('updated_at', { useTz: true }).notNullable()
     })

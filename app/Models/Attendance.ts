@@ -23,6 +23,9 @@ export default class Attendance extends BaseModel {
   @column()
   public status: string
 
+  @column()
+  public cancellationReason: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
