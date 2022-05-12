@@ -9,8 +9,8 @@ export default class MedicalRecordsController {
   }
 
   public async showByAttendanceId({ request }: HttpContextContract) {
-    const { id } = request.params()
-    return await MedicalRecord.findOrFail(id)
+    const { attendanceId } = request.params()
+    return await MedicalRecord.findOrFail(attendanceId)
   }
 
   public async create({ request, response }: HttpContextContract) {

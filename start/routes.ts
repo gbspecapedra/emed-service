@@ -57,7 +57,7 @@ Route.group(() => {
    * Medical Records
    */
   Route.get('/record/:id', 'MedicalRecordsController.show')
-  Route.get('/record/:id', 'MedicalRecordsController.showByAttendanceId')
+  Route.get('/record/:attendanceId', 'MedicalRecordsController.showByAttendanceId')
   Route.post('/record', 'MedicalRecordsController.create')
   Route.put('/record/:id', 'MedicalRecordsController.update')
 
