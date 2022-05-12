@@ -15,5 +15,7 @@ export default class CreateAttendanceValidator {
     ]),
   })
 
-  public messages = {}
+  public messages = {
+    required: '{{ field }} is required',
+  }
 }
