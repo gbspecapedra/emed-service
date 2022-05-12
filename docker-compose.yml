@@ -5,9 +5,9 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_DATABASE: emed
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'passwordb'
-      MYSQL_ROOT_PASSWORD: passwordb
+      MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - '3306:3306'
