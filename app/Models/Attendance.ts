@@ -1,6 +1,7 @@
 import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 
+import Patient from './Patient'
 import Professional from './Professional'
 
 export default class Attendance extends BaseModel {
@@ -11,19 +12,28 @@ export default class Attendance extends BaseModel {
   public type: string
 
   @column()
-  public medicalRecordId: number
+  public professionalId: number
 
   @column()
-  public professionalId: number
+  public patientId: number
 
   @column.dateTime()
   public date: DateTime
+
+  @column()
+  public status: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasOne(() => Patient, {
+    localKey: 'patientId',
+    foreignKey: 'id',
+  })
+  public patient: HasOne<typeof Patient>
 
   @hasOne(() => Professional, {
     localKey: 'professionalId',

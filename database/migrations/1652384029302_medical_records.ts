@@ -7,10 +7,10 @@ export default class MedicalRecords extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
       table
-        .integer('patient_id')
+        .integer('attendance_id')
         .unsigned()
         .references('id')
-        .inTable('patients')
+        .inTable('attendances')
         .onDelete('CASCADE')
       table.text('description', 'longtext').notNullable()
       table.timestamp('created_at', { useTz: true }).notNullable()

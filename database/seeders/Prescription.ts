@@ -1,16 +1,16 @@
 import { faker } from '@faker-js/faker'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import MedicalRecord from 'App/Models/MedicalRecord'
+import Prescription from 'App/Models/Prescription'
 
-export default class MedicalRecordSeeder extends BaseSeeder {
+export default class PrescriptionSeeder extends BaseSeeder {
   public async run() {
-    await MedicalRecord.createMany([
+    await Prescription.createMany([
       {
-        attendanceId: 1,
+        medicalRecordId: 1,
         description: faker.lorem.text(),
       },
       {
-        attendanceId: 1,
+        medicalRecordId: 1,
         description: faker.lorem.text(),
       },
     ])

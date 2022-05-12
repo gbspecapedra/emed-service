@@ -1,6 +1,6 @@
+import { faker } from '@faker-js/faker'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Professional from 'App/Models/Professional'
-import { faker } from '@faker-js/faker'
 
 export default class ProfessionalSeeder extends BaseSeeder {
   public async run() {

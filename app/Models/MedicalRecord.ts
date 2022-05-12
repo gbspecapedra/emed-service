@@ -1,16 +1,23 @@
-import { BaseModel, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  ManyToMany,
+  manyToMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 
+import Attendance from './Attendance'
 import Exam from './Exam'
 import Medicine from './Medicine'
-import Prescription from './Prescription'
 
 export default class MedicalRecord extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public patientId: number
+  public attendanceId: number
 
   @column()
   public description: string
@@ -21,11 +28,8 @@ export default class MedicalRecord extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasMany(() => Prescription, {
-    localKey: 'id',
-    foreignKey: 'medicalRecordId',
-  })
-  public prescriptions: HasMany<typeof Prescription>
+  @belongsTo(() => Attendance)
+  public attendance: BelongsTo<typeof Attendance>
 
   @manyToMany(() => Medicine)
   public medicines: ManyToMany<typeof Medicine>

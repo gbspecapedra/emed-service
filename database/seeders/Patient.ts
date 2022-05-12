@@ -1,6 +1,6 @@
+import { faker } from '@faker-js/faker'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Patient from 'App/Models/Patient'
-import { faker } from '@faker-js/faker'
 import { DateTime } from 'luxon'
 
 export default class PatientSeeder extends BaseSeeder {

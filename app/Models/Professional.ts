@@ -43,6 +43,12 @@ export default class Professional extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  @hasMany(() => Attendance, {
+    localKey: 'id',
+    foreignKey: 'professionalId',
+  })
+  public attendances: HasMany<typeof Attendance>
+
   @beforeSave()
   public static async hashPassword(professional: Professional) {
     if (professional.$dirty.password) {
@@ -53,10 +59,4 @@ export default class Professional extends BaseModel {
   public checkPassword(password: string) {
     return Hash.verify(this.password, password)
   }
-
-  @hasMany(() => Attendance, {
-    localKey: 'id',
-    foreignKey: 'professionalId',
-  })
-  public attendances: HasMany<typeof Attendance>
 }

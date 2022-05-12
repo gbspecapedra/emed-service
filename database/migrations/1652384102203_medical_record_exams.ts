@@ -19,6 +19,7 @@ export default class MedicalRecordExams extends BaseSchema {
         .references('id')
         .inTable('exams')
         .onDelete('CASCADE')
+      table.text('result', 'longtext').nullable()
     })
   }
 
