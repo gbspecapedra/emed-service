@@ -57,10 +57,10 @@ $ docker-compose up -d
 # Create the .env file in the repository using the sample file .env.example
 
 # Run the development server
-$ yarn run dev
+$ yarn dev
 
-# Run the migrations
-$ yarn run reset-db
+# Run the migrations & seeders
+$ yarn reset-db
 
 # Navigate to http://localhost:3333
 # The app will automatically reload if you change any of the source files.
