@@ -1,23 +1,3 @@
-/*
-|--------------------------------------------------------------------------
-| Routes
-|--------------------------------------------------------------------------
-|
-| This file is dedicated for defining HTTP routes. A single file is enough
-| for majority of projects, however you can define routes in different
-| files and just make sure to import them inside this file. For example
-|
-| Define routes in following two files
-| ├── start/routes/cart.ts
-| ├── start/routes/customer.ts
-|
-| and then import them inside `start/routes.ts` as follows
-|
-| import './routes/cart'
-| import './routes/customer'
-|
-*/
-
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', ({ response }) => {
@@ -56,4 +36,37 @@ Route.group(() => {
   Route.post('/professionals', 'ProfessionalsController.create')
   Route.put('/professionals/:id', 'ProfessionalsController.update')
   Route.delete('/professionals/:id', 'ProfessionalsController.destroy')
+
+  /**
+   * Patients
+   */
+  Route.get('/patients', 'PatientsController.index')
+  Route.get('/patients/:id', 'PatientsController.show')
+  Route.post('/patients', 'PatientsController.create')
+  Route.put('/patients/:id', 'PatientsController.update')
+  Route.delete('/patients/:id', 'PatientsController.destroy')
+
+  /**
+   * Attendances
+   */
+  Route.get('/attendance', 'AttendancesController.index')
+  Route.post('/attendance', 'AttendancesController.create')
+  Route.put('/attendance/:id', 'AttendancesController.update')
+
+  /**
+   * Medical Records
+   */
+  Route.get('/record/:id', 'MedicalRecordsController.show')
+  Route.get('/record/:id', 'MedicalRecordsController.showByAttendanceId')
+  Route.post('/record', 'MedicalRecordsController.create')
+  Route.put('/record/:id', 'MedicalRecordsController.update')
+
+  /**
+   * Prescriptions
+   */
+  Route.get('/prescriptions', 'PrescriptionsController.index')
+  Route.get('/prescriptions/:id', 'PrescriptionsController.show')
+  Route.post('/prescriptions', 'PrescriptionsController.create')
+  Route.put('/prescriptions/:id', 'PrescriptionsController.update')
+  Route.delete('/prescriptions/:id', 'PrescriptionsController.destroy')
 }).middleware('auth')
