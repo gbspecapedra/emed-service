@@ -1,7 +1,7 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
 import Attendance from 'App/Models/Attendance'
 import CreateAttendanceValidator from 'App/Validators/CreateAttendanceValidator'
+
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class AttendancesController {
   public async index() {

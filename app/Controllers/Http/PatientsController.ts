@@ -1,7 +1,7 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
 import Patient from 'App/Models/Patient'
 import CreatePatientValidator from 'App/Validators/CreatePatientValidator'
+
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class PatientsController {
   public async index() {

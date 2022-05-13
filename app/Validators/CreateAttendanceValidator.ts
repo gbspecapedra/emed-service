@@ -9,7 +9,6 @@ export default class CreateAttendanceValidator {
     professionalId: schema.number([rules.unsigned()]),
     patientId: schema.number([rules.unsigned()]),
     date: schema.date({}, [rules.after('today')]),
-    status: schema.enum(['CONFIRMED', 'INPROGRESS', 'DONE', 'CANCELED'] as const),
     cancellationReason: schema.string({ trim: true }, [
       rules.requiredWhen('status', '=', 'CANCELED'),
     ]),

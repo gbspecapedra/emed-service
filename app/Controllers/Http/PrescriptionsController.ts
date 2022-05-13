@@ -1,7 +1,7 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Prescription from 'App/Models/Prescription'
 import CreatePrescriptionValidator from 'App/Validators/CreatePrescriptionValidator'
 
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 export default class PrescriptionsController {
   public async index() {
     return await Prescription.all()

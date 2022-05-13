@@ -31,42 +31,76 @@ Route.group(() => {
   /**
    * Professionals
    */
-  Route.get('/professionals', 'ProfessionalsController.index')
-  Route.get('/professionals/:id', 'ProfessionalsController.show')
-  Route.post('/professionals', 'ProfessionalsController.create')
-  Route.put('/professionals/:id', 'ProfessionalsController.update')
-  Route.delete('/professionals/:id', 'ProfessionalsController.destroy')
+  Route.group(() => {
+    Route.get('', 'ProfessionalsController.index')
+    Route.get(':id', 'ProfessionalsController.show')
+    Route.post('', 'ProfessionalsController.create')
+    Route.put(':id', 'ProfessionalsController.update')
+    Route.delete(':id', 'ProfessionalsController.destroy')
+  }).prefix('professionals')
 
   /**
    * Patients
    */
-  Route.get('/patients', 'PatientsController.index')
-  Route.get('/patients/:id', 'PatientsController.show')
-  Route.post('/patients', 'PatientsController.create')
-  Route.put('/patients/:id', 'PatientsController.update')
-  Route.delete('/patients/:id', 'PatientsController.destroy')
+  Route.group(() => {
+    Route.get('', 'PatientsController.index')
+    Route.get(':id', 'PatientsController.show')
+    Route.post('', 'PatientsController.create')
+    Route.put(':id', 'PatientsController.update')
+    Route.delete(':id', 'PatientsController.destroy')
+  }).prefix('patients')
 
   /**
    * Attendances
    */
-  Route.get('/attendance', 'AttendancesController.index')
-  Route.post('/attendance', 'AttendancesController.create')
-  Route.put('/attendance/:id', 'AttendancesController.update')
+  Route.group(() => {
+    Route.get('', 'AttendancesController.index')
+    Route.post('', 'AttendancesController.create')
+    Route.put(':id', 'AttendancesController.update')
+  }).prefix('attendances')
 
   /**
    * Medical Records
    */
-  Route.get('/record/:id', 'MedicalRecordsController.show')
-  Route.get('/record/:attendanceId', 'MedicalRecordsController.showByAttendanceId')
-  Route.post('/record', 'MedicalRecordsController.create')
-  Route.put('/record/:id', 'MedicalRecordsController.update')
+  Route.group(() => {
+    Route.get(':id', 'MedicalRecordsController.show')
+    Route.get(':attendanceId', 'MedicalRecordsController.showByAttendanceId')
+    Route.post('', 'MedicalRecordsController.create')
+    Route.put(':id', 'MedicalRecordsController.update')
+  }).prefix('registers')
 
   /**
    * Prescriptions
    */
-  Route.get('/prescriptions', 'PrescriptionsController.index')
-  Route.get('/prescriptions/:id', 'PrescriptionsController.show')
-  Route.post('/prescriptions', 'PrescriptionsController.create')
-  Route.put('/prescriptions/:id', 'PrescriptionsController.update')
-  Route.delete('/prescriptions/:id', 'PrescriptionsController.destroy')
+  Route.group(() => {
+    Route.get('', 'PrescriptionsController.index')
+    Route.get(':id', 'PrescriptionsController.show')
+    Route.post('', 'PrescriptionsController.create')
+    Route.put(':id', 'PrescriptionsController.update')
+    Route.delete(':id', 'PrescriptionsController.destroy')
+  }).prefix('prescriptions')
+
+  /**
+   * Medicine
+   */
+  Route.group(() => {
+    Route.get('', 'MedicinesController.index')
+    Route.get(':id', 'MedicinesController.show')
+  }).prefix('medicines')
+
+  /**
+   * Exam
+   */
+  Route.group(() => {
+    Route.get('', 'ExamsController.index')
+    Route.get(':id', 'ExamsController.show')
+  }).prefix('exams')
+
+  /**
+   * Health Plan
+   */
+  Route.group(() => {
+    Route.get('', 'HealthPlansController.index')
+    Route.get(':id', 'HealthPlansController.show')
+  }).prefix('plans')
 }).middleware('auth')
