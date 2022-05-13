@@ -33,10 +33,6 @@ API developed with the main following technologies:
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-## 🔖 API Documentation
-
-[OpenAPI Specification](https://app.swaggerhub.com/apis/gisabernardess/emed/1.0.0) to eMED RESTful API.
-
 ## ℹ️ How To Use
 
 To clone and run this application, you'll need [Git](https://git-scm.com), [Yarn](https://legacy.yarnpkg.com), [Node.js](https://nodejs.org/en/) >= 16.15, [Docker](https://docs.docker.com/desktop/) and [Docker-Compose](https://docs.docker.com/compose/). From your command line:
@@ -65,6 +61,14 @@ $ yarn reset-db
 # Navigate to http://localhost:3333
 # The app will automatically reload if you change any of the source files.
 ```
+
+## 🔖 API Documentation
+
+### Specification
+[OpenAPI Specification](https://app.swaggerhub.com/apis/gisabernardess/emed/1.0.0) to eMED RESTful API.
+
+### Class Diagram
+![emed-class-diagram](https://user-images.githubusercontent.com/17882257/168187472-2d292a60-895e-4fb6-b9ba-d4b5c8a4bf10.png)
 
 ## 📝 License
 
