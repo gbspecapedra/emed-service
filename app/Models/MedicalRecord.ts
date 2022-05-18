@@ -1,18 +1,12 @@
-import {
-  BaseModel,
-  BelongsTo,
-  belongsTo,
-  column,
-  ManyToMany,
-  manyToMany,
-} from '@ioc:Adonis/Lucid/Orm'
+import { BelongsTo, belongsTo, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import AppBaseModel from './AppBaseModel'
 
 import Attendance from './Attendance'
 import Exam from './Exam'
 import Medicine from './Medicine'
 
-export default class MedicalRecord extends BaseModel {
+export default class MedicalRecord extends AppBaseModel {
   @column({ isPrimary: true })
   public id: number
 

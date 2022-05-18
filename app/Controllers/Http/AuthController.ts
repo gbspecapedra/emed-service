@@ -14,7 +14,11 @@ export default class AuthController {
       const token = await auth.use('api').attempt(email, password, {
         expiresIn: '24hours',
       })
-      return token.toJSON()
+
+      return response.ok({
+        user: user,
+        access: token.toJSON(),
+      })
     } catch (error) {
       response.internalServerError(error)
     }

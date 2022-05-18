@@ -1,10 +1,11 @@
-import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import AppBaseModel from './AppBaseModel'
 
 import Patient from './Patient'
 import Professional from './Professional'
 
-export default class Attendance extends BaseModel {
+export default class Attendance extends AppBaseModel {
   @column({ isPrimary: true })
   public id: number
 

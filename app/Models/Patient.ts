@@ -1,10 +1,11 @@
-import { BaseModel, column, HasMany, hasMany, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { column, HasMany, hasMany, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import AppBaseModel from './AppBaseModel'
 
 import Attendance from './Attendance'
 import HealthPlan from './HealthPlan'
 
-export default class Patient extends BaseModel {
+export default class Patient extends AppBaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -71,7 +72,6 @@ export default class Patient extends BaseModel {
   @hasOne(() => HealthPlan, {
     localKey: 'healthPlanId',
     foreignKey: 'id',
-    serializeAs: 'healthPlan',
   })
   public healthPlan: HasOne<typeof HealthPlan>
 }

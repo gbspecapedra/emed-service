@@ -1,10 +1,11 @@
 import Hash from '@ioc:Adonis/Core/Hash'
-import { BaseModel, beforeSave, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { beforeSave, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import AppBaseModel from './AppBaseModel'
 
 import Attendance from './Attendance'
 
-export default class Professional extends BaseModel {
+export default class Professional extends AppBaseModel {
   @column({ isPrimary: true })
   public id: number
 
