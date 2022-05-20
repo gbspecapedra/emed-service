@@ -35,7 +35,7 @@ API developed with the main following technologies:
 
 ## ℹ️ How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com), [Yarn](https://legacy.yarnpkg.com), [Node.js](https://nodejs.org/en/) >= 16.15, [Docker](https://docs.docker.com/desktop/) and [Docker-Compose](https://docs.docker.com/compose/). From your command line:
+To clone and run this application, you'll need [Git](https://git-scm.com), [Yarn](https://legacy.yarnpkg.com), [Node.js](https://nodejs.org/en/) >= 16.15, [Docker](https://docs.docker.com/desktop/) and [Compose](https://docs.docker.com/compose/). From your command line:
 
 ```bash
 # Clone the repository
@@ -47,10 +47,10 @@ $ cd emed-service
 # Install dependencies
 $ yarn
 
-# Start docker container for MySQL
-$ docker-compose up -d
-
 # Create the .env file in the repository using the sample file .env.example
+
+# Start docker container for MySQL
+$ docker compose up -d
 
 # Run the development server
 $ yarn dev
