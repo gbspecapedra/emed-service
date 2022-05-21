@@ -27,7 +27,7 @@ export default class PrescriptionsController {
       const { id, ...prescription } = request.all()
 
       const prescriptionExists = await Prescription.find(id)
-      if (!prescriptionExists) return response.notFound({ message: 'Prescription not found' })
+      if (!prescriptionExists) return response.notFound({ error: 'Prescription not found.' })
 
       return await prescriptionExists.merge(prescription).save()
     } catch (error) {
@@ -40,7 +40,7 @@ export default class PrescriptionsController {
       const { id } = request.params()
 
       const prescriptionExists = await Prescription.find(id)
-      if (!prescriptionExists) return response.notFound({ message: 'Patient not found' })
+      if (!prescriptionExists) return response.notFound({ error: 'Prescription not found.' })
 
       return await prescriptionExists.delete()
     } catch (error) {

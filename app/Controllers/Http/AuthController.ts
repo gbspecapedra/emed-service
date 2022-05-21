@@ -9,7 +9,9 @@ export default class AuthController {
       const { email, password } = request.all()
 
       const user = await Professional.findBy('email', email)
-      if (!user) return response.notFound({ error: 'User not found!' })
+      if (!user) return response.notFound({ error: 'User not found.' })
+
+      if (!user.active) return response.forbidden({ error: 'User needs to be active to login.' })
 
       const token = await auth.use('api').attempt(email, password, {
         expiresIn: '24hours',
@@ -29,7 +31,7 @@ export default class AuthController {
       const { email } = await request.validate(ResetPasswordValidator)
 
       const user = await Professional.findBy('email', email)
-      if (!user) return response.notFound({ error: 'User not found!' })
+      if (!user) return response.notFound({ error: 'User not found.' })
 
       const newPassword = string.generateRandom(8)
 

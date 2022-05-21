@@ -32,18 +32,18 @@ export default class ProfessionalsController {
       const { id, name, specialty, email, oldPassword, password } = request.all()
 
       const professionalExists = await Professional.find(id)
-      if (!professionalExists) return response.notFound({ message: 'Professional not found' })
+      if (!professionalExists) return response.notFound({ error: 'Professional not found.' })
 
       if (email && email !== professionalExists.email) {
         const emailAlreadyExists = await Professional.find({ where: { email } })
         if (emailAlreadyExists)
           return response.badRequest({
-            message: 'There is a professional with this email. Try another one',
+            error: 'There is a professional with this email. Try another one.',
           })
       }
 
       if (oldPassword && !(await professionalExists.checkPassword(oldPassword))) {
-        return response.badRequest({ message: 'Current password does not match' })
+        return response.badRequest({ error: 'Current password does not match.' })
       }
 
       return await professionalExists
@@ -64,7 +64,7 @@ export default class ProfessionalsController {
       const { id } = request.params()
 
       const professionalExists = await Professional.find(id)
-      if (!professionalExists) return response.notFound({ message: 'Professional not found' })
+      if (!professionalExists) return response.notFound({ error: 'Professional not found.' })
 
       return await professionalExists.merge({ active: false }).save()
     } catch (error) {

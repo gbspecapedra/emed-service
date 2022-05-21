@@ -28,7 +28,7 @@ export default class PatientsController {
       const { id, ...patient } = request.all()
 
       const patientExists = await Patient.find(id)
-      if (!patientExists) return response.notFound({ message: 'Patient not found' })
+      if (!patientExists) return response.notFound({ error: 'Patient not found.' })
 
       return await patientExists.merge(patient).save()
     } catch (error) {
@@ -41,7 +41,7 @@ export default class PatientsController {
       const { id } = request.params()
 
       const patientExists = await Patient.find(id)
-      if (!patientExists) return response.notFound({ message: 'Patient not found' })
+      if (!patientExists) return response.notFound({ error: 'Patient not found.' })
 
       return await patientExists.merge({ active: false }).save()
     } catch (error) {

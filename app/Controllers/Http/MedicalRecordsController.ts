@@ -28,7 +28,7 @@ export default class MedicalRecordsController {
       const { id, ...register } = request.all()
 
       const registerExists = await MedicalRecord.find(id)
-      if (!registerExists) return response.notFound({ message: 'Medical Record not found' })
+      if (!registerExists) return response.notFound({ error: 'Medical Record not found.' })
 
       return await registerExists.merge(register).save()
     } catch (error) {

@@ -26,7 +26,7 @@ export default class AttendancesController {
       const { id, status, cancellationReason } = request.all()
 
       const attendanceExists = await Attendance.find(id)
-      if (!attendanceExists) return response.notFound({ message: 'Register not found' })
+      if (!attendanceExists) return response.notFound({ error: 'Register not found.' })
 
       return await attendanceExists
         .merge({
