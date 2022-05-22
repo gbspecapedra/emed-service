@@ -6,7 +6,7 @@ export default class ProfessionalsSchema extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
-      table.string('type', 8).notNullable()
+      table.string('type', 15).notNullable()
       table.string('name').notNullable()
       table.integer('registration_number').unsigned().nullable().unique()
       table.string('registration_state', 2).nullable()

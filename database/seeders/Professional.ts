@@ -54,6 +54,13 @@ export default class ProfessionalSeeder extends BaseSeeder {
         password: '1234567Aa!',
         active: true,
       },
+      {
+        type: 'RECEPTIONIST',
+        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
+        email: 'contact@emed.com',
+        password: '1234567Aa!',
+        active: true,
+      },
     ])
   }
 }
