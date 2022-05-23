@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Primary care"
+  },
+  {
+    "name": "Family practice physician"
+  },
+  {
+    "name": "Internal medicine physician"
+  },
+  {
+    "name": "Pediatrician"
+  },
+  {
+    "name": "Geriatric medicine"
+  },
+  {
+    "name": "Allergist"
+  },
+  {
+    "name": "Dermatologist"
+  },
+  {
+    "name": "Infectious disease"
+  },
+  {
+    "name": "Ophthalmologist"
+  },
+  {
+    "name": "Obstetrician/gynecologist"
+  },
+  {
+    "name": "Cardiologist"
+  },
+  {
+    "name": "Endocrinologist"
+  },
+  {
+    "name": "Gastroenterologist"
+  },
+  {
+    "name": "Nephrologist"
+  },
+  {
+    "name": "Urologist"
+  },
+  {
+    "name": "Pulmonologist"
+  },
+  {
+    "name": "Otolaryngologist"
+  },
+  {
+    "name": "Neurologist"
+  },
+  {
+    "name": "Psychiatrist"
+  },
+  {
+    "name": "Oncologist"
+  },
+  {
+    "name": "Radiologist"
+  },
+  {
+    "name": "Rheumatologist"
+  },
+  {
+    "name": "General surgeon"
+  },
+  {
+    "name": "Orthopedic surgeon"
+  },
+  {
+    "name": "Cardiac surgeon"
+  },
+  {
+    "name": "Anesthesiologist"
+  }
+]

@@ -10,7 +10,7 @@ export default class Professional extends AppBaseModel {
   public id: number
 
   @column()
-  public type: string
+  public role: string
 
   @column()
   public name: string

@@ -5,12 +5,12 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class PatientsController {
   public async index() {
-    return await Patient.all()
+    return await Patient.query().preload('attendances').preload('healthPlan')
   }
 
   public async show({ request }: HttpContextContract) {
     const { id } = request.params()
-    return await Patient.findOrFail(id)
+    return await Patient.query().preload('attendances').preload('healthPlan').where('id', id)
   }
 
   public async create({ request, response }: HttpContextContract) {
@@ -43,7 +43,7 @@ export default class PatientsController {
       const patientExists = await Patient.find(id)
       if (!patientExists) return response.notFound({ error: 'Patient not found.' })
 
-      return await patientExists.merge({ active: false }).save()
+      return await patientExists.delete()
     } catch (error) {
       response.internalServerError(error)
     }

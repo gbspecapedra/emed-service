@@ -8,7 +8,7 @@ export default class ProfessionalSeeder extends BaseSeeder {
 
     await Professional.updateOrCreateMany(uniqueKey, [
       {
-        type: 'NURSE',
+        role: 'NURSE',
         name: faker.fake('{{name.firstName}} {{name.lastName}}'),
         registrationNumber: faker.datatype.number({ min: 6 }),
         registrationState: faker.address.stateAbbr(),
@@ -18,7 +18,7 @@ export default class ProfessionalSeeder extends BaseSeeder {
         active: true,
       },
       {
-        type: 'NURSE',
+        role: 'NURSE',
         name: faker.fake('{{name.firstName}} {{name.lastName}}'),
         registrationNumber: faker.datatype.number({ min: 6 }),
         registrationState: faker.address.stateAbbr(),
@@ -28,7 +28,7 @@ export default class ProfessionalSeeder extends BaseSeeder {
         active: false,
       },
       {
-        type: 'DOCTOR',
+        role: 'DOCTOR',
         name: faker.fake('{{name.firstName}} {{name.lastName}}'),
         registrationNumber: faker.datatype.number({ min: 6 }),
         registrationState: faker.address.stateAbbr(),
@@ -38,7 +38,7 @@ export default class ProfessionalSeeder extends BaseSeeder {
         active: true,
       },
       {
-        type: 'DOCTOR',
+        role: 'DOCTOR',
         name: faker.fake('{{name.firstName}} {{name.lastName}}'),
         registrationNumber: faker.datatype.number({ min: 6 }),
         registrationState: faker.address.stateAbbr(),
@@ -48,14 +48,14 @@ export default class ProfessionalSeeder extends BaseSeeder {
         active: false,
       },
       {
-        type: 'ADMIN',
+        role: 'ADMIN',
         name: faker.fake('{{name.firstName}} {{name.lastName}}'),
         email: 'admin@emed.com',
         password: '1234567Aa!',
         active: true,
       },
       {
-        type: 'RECEPTIONIST',
+        role: 'RECEPTIONIST',
         name: faker.fake('{{name.firstName}} {{name.lastName}}'),
         email: 'contact@emed.com',
         password: '1234567Aa!',

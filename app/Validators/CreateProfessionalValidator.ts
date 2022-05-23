@@ -5,20 +5,20 @@ export default class CreateProfessionalValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    type: schema.enum(['ADMIN', 'RECEPTIONIST', 'DOCTOR', 'NURSE'] as const),
+    role: schema.enum(['ADMIN', 'RECEPTIONIST', 'DOCTOR', 'NURSE'] as const),
     name: schema.string({ trim: true }),
-    registrationNumber: schema.number([
+    registrationNumber: schema.number.optional([
       rules.unsigned(),
       rules.unique({ table: 'professionals', column: 'registration_number' }),
-      rules.requiredWhen('type', 'notIn', ['ADMIN', 'RECEPTIONIST']),
+      rules.requiredWhen('role', 'in', ['DOCTOR', 'NURSE']),
     ]),
-    registrationState: schema.string({ trim: true }, [
+    registrationState: schema.string.optional({ trim: true }, [
       rules.minLength(2),
       rules.maxLength(2),
-      rules.requiredWhen('type', 'notIn', ['ADMIN', 'RECEPTIONIST']),
+      rules.requiredWhen('role', 'in', ['DOCTOR', 'NURSE']),
     ]),
-    specialty: schema.string({ trim: true }, [
-      rules.requiredWhen('type', 'notIn', ['ADMIN', 'RECEPTIONIST']),
+    specialty: schema.string.optional({ trim: true }, [
+      rules.requiredWhen('role', 'in', ['DOCTOR', 'NURSE']),
     ]),
     email: schema.string({ trim: true }, [
       rules.email(),

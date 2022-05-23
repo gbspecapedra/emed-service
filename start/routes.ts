@@ -103,4 +103,11 @@ Route.group(() => {
     Route.get('', 'HealthPlansController.index')
     Route.get(':id', 'HealthPlansController.show')
   }).prefix('plans')
+
+  /**
+   * Specialties
+   */
+  Route.group(() => {
+    Route.get('', 'SpecialtiesController.index')
+  }).prefix('specialties')
 }).middleware('auth')

@@ -1,4 +1,12 @@
-import { column, HasMany, hasMany, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BelongsTo,
+  belongsTo,
+  column,
+  HasMany,
+  hasMany,
+  HasOne,
+  hasOne,
+} from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import AppBaseModel from './AppBaseModel'
 
@@ -69,9 +77,6 @@ export default class Patient extends AppBaseModel {
   })
   public attendances: HasMany<typeof Attendance>
 
-  @hasOne(() => HealthPlan, {
-    localKey: 'healthPlanId',
-    foreignKey: 'id',
-  })
-  public healthPlan: HasOne<typeof HealthPlan>
+  @belongsTo(() => HealthPlan)
+  public healthPlan: BelongsTo<typeof HealthPlan>
 }

@@ -29,7 +29,7 @@ export default class ProfessionalsController {
 
   public async update({ request, response }: HttpContextContract) {
     try {
-      const { id, name, specialty, email, oldPassword, password } = request.all()
+      const { id, active, name, specialty, email, oldPassword, password } = request.all()
 
       const professionalExists = await Professional.find(id)
       if (!professionalExists) return response.notFound({ error: 'Professional not found.' })
@@ -52,6 +52,7 @@ export default class ProfessionalsController {
           specialty,
           email,
           password,
+          active,
         })
         .save()
     } catch (error) {
@@ -66,7 +67,7 @@ export default class ProfessionalsController {
       const professionalExists = await Professional.find(id)
       if (!professionalExists) return response.notFound({ error: 'Professional not found.' })
 
-      return await professionalExists.merge({ active: false }).save()
+      return await professionalExists.delete()
     } catch (error) {
       response.internalServerError(error)
     }
