@@ -10,7 +10,11 @@ export default class PatientsController {
 
   public async show({ request }: HttpContextContract) {
     const { id } = request.params()
-    return await Patient.query().preload('attendances').preload('healthPlan').where('id', id)
+    return await Patient.query()
+      .preload('attendances')
+      .preload('healthPlan')
+      .where('id', id)
+      .first()
   }
 
   public async create({ request, response }: HttpContextContract) {
