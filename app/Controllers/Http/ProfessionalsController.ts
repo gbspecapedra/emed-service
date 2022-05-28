@@ -5,12 +5,17 @@ import CreateProfessionalValidator from 'App/Validators/CreateProfessionalValida
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 export default class ProfessionalsController {
   public async index() {
-    return await Professional.all()
+    return await Professional.query().preload('attendances')
   }
 
   public async show({ request }: HttpContextContract) {
     const { id } = request.params()
-    return await Professional.findOrFail(id)
+    return await Professional.query()
+      .preload('attendances', (query) => {
+        query.preload('patient')
+      })
+      .where('id', id)
+      .first()
   }
 
   public async create({ request, response }: HttpContextContract) {
