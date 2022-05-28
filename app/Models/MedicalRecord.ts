@@ -1,4 +1,12 @@
-import { BelongsTo, belongsTo, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BelongsTo,
+  belongsTo,
+  column,
+  HasOne,
+  hasOne,
+  ManyToMany,
+  manyToMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import AppBaseModel from './AppBaseModel'
 
@@ -14,7 +22,7 @@ export default class MedicalRecord extends AppBaseModel {
   public attendanceId: number
 
   @column()
-  public description: string
+  public description: string | null
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

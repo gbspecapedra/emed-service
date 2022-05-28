@@ -8,6 +8,15 @@ export default class AttendancesController {
     return await Attendance.query().preload('patient').preload('professional')
   }
 
+  public async show({ request }: HttpContextContract) {
+    const { id } = request.params()
+    return await Attendance.query()
+      .preload('patient')
+      .preload('record')
+      .where('id', '=', id)
+      .first()
+  }
+
   public async create({ request, response }: HttpContextContract) {
     try {
       const attendance = await request.validate(CreateAttendanceValidator)

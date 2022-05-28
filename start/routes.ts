@@ -55,6 +55,7 @@ Route.group(() => {
    */
   Route.group(() => {
     Route.get('', 'AttendancesController.index')
+    Route.get(':id', 'AttendancesController.show')
     Route.post('', 'AttendancesController.create')
     Route.put(':id', 'AttendancesController.update')
   }).prefix('attendances')

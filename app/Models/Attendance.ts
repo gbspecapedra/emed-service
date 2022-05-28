@@ -1,6 +1,7 @@
 import { column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import AppBaseModel from './AppBaseModel'
+import MedicalRecord from './MedicalRecord'
 
 import Patient from './Patient'
 import Professional from './Professional'
@@ -44,4 +45,10 @@ export default class Attendance extends AppBaseModel {
     foreignKey: 'id',
   })
   public professional: HasOne<typeof Professional>
+
+  @hasOne(() => MedicalRecord, {
+    localKey: 'id',
+    foreignKey: 'attendanceId',
+  })
+  public record: HasOne<typeof MedicalRecord>
 }

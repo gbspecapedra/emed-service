@@ -12,7 +12,7 @@ export default class PatientsController {
     const { id } = request.params()
     return await Patient.query()
       .preload('attendances', (query) => {
-        query.preload('professional')
+        query.preload('professional').preload('record')
       })
       .preload('healthPlan')
       .where('id', '=', id)

@@ -22,7 +22,7 @@ export default class CreatePatientValidator {
     state: schema.string({ trim: true }),
     country: schema.string({ trim: true }),
     healthPlanId: schema.number.optional(),
-    healthPlanExpiration: schema.date({}, [rules.requiredIfExists('healthPlanId')]),
+    healthPlanExpiration: schema.date.optional({}, [rules.requiredIfExists('healthPlanId')]),
   })
 
   public messages = {

@@ -6,7 +6,7 @@ export default class CreateMedicalRecordValidator {
 
   public schema = schema.create({
     attendanceId: schema.number([rules.unsigned()]),
-    description: schema.string({ trim: true }),
+    description: schema.string.nullableAndOptional({ trim: true }),
   })
 
   public messages = {
