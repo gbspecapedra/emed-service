@@ -2,6 +2,7 @@ import Attendance from 'App/Models/Attendance'
 import CreateAttendanceValidator from 'App/Validators/CreateAttendanceValidator'
 
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import MedicalRecord from 'App/Models/MedicalRecord'
 
 export default class AttendancesController {
   public async index() {
@@ -12,7 +13,7 @@ export default class AttendancesController {
     const { id } = request.params()
     return await Attendance.query()
       .preload('patient')
-      .preload('record')
+      .preload('medicalRecord')
       .where('id', '=', id)
       .first()
   }
@@ -21,9 +22,12 @@ export default class AttendancesController {
     try {
       const attendance = await request.validate(CreateAttendanceValidator)
 
+      const medicalRecord = await MedicalRecord.create({})
+
       return await Attendance.create({
         ...attendance,
         status: 'CONFIRMED',
+        medicalRecordId: medicalRecord.id,
       })
     } catch (error) {
       response.badRequest(error)

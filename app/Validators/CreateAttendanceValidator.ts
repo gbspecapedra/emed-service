@@ -6,10 +6,17 @@ export default class CreateAttendanceValidator {
 
   public schema = schema.create({
     type: schema.enum(['GENERAL', 'EMERGENCY', 'TRIAGE'] as const),
+    status: schema.enum.optional([
+      'CANCELED',
+      'CONFIRMED',
+      'DONE',
+      'INPROGRESS',
+      'NOTATTENDED',
+    ] as const),
     professionalId: schema.number([rules.unsigned()]),
     patientId: schema.number([rules.unsigned()]),
     date: schema.date({}, [rules.after('today')]),
-    cancellationReason: schema.string({ trim: true }, [
+    cancellationReason: schema.string.optional({ trim: true }, [
       rules.requiredWhen('status', '=', 'CANCELED'),
     ]),
   })

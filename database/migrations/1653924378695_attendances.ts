@@ -19,6 +19,12 @@ export default class Attendances extends BaseSchema {
         .references('id')
         .inTable('patients')
         .onDelete('CASCADE')
+      table
+        .integer('medical_record_id')
+        .unsigned()
+        .references('id')
+        .inTable('medical_records')
+        .onDelete('CASCADE')
       table.timestamp('date', { useTz: true }).notNullable()
       table.string('status', 180).notNullable()
       table.string('cancellation_reason').nullable()

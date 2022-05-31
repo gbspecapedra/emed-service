@@ -1,12 +1,4 @@
-import {
-  BelongsTo,
-  belongsTo,
-  column,
-  HasOne,
-  hasOne,
-  ManyToMany,
-  manyToMany,
-} from '@ioc:Adonis/Lucid/Orm'
+import { column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import AppBaseModel from './AppBaseModel'
 
@@ -19,10 +11,25 @@ export default class MedicalRecord extends AppBaseModel {
   public id: number
 
   @column()
-  public attendanceId: number
+  public description: string
 
   @column()
-  public description: string | null
+  public weight: number
+
+  @column()
+  public height: number
+
+  @column()
+  public bmi: string
+
+  @column()
+  public diastolicPressure: number
+
+  @column()
+  public systolicPressure: number
+
+  @column()
+  public temperature: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -30,12 +37,23 @@ export default class MedicalRecord extends AppBaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => Attendance)
-  public attendance: BelongsTo<typeof Attendance>
+  @hasMany(() => Attendance, {
+    localKey: 'id',
+    foreignKey: 'medicalRecordId',
+  })
+  public attendances: HasMany<typeof Attendance>
 
-  @manyToMany(() => Medicine)
+  @manyToMany(() => Medicine, {
+    pivotTable: 'medical_record_medicine',
+    pivotForeignKey: 'medical_record_id',
+    pivotRelatedForeignKey: 'medicine_id',
+  })
   public medicines: ManyToMany<typeof Medicine>
 
-  @manyToMany(() => Exam)
+  @manyToMany(() => Exam, {
+    pivotTable: 'medical_record_exam',
+    pivotForeignKey: 'medical_record_id',
+    pivotRelatedForeignKey: 'exam_id',
+  })
   public exams: ManyToMany<typeof Exam>
 }

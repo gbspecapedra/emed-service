@@ -18,28 +18,28 @@ export default class AttendanceSeeder extends BaseSeeder {
         professionalId: 2,
         patientId: 2,
         date: DateTime.local().plus({ days: Number(faker.random.numeric(2)) }),
-        status: 'DONE',
+        status: 'CONFIRMED',
       },
       {
         type: 'EMERGENCY',
         professionalId: 3,
         patientId: 3,
         date: DateTime.local().plus({ days: Number(faker.random.numeric(2)) }),
-        status: 'INPROGRESS',
+        status: 'CONFIRMED',
       },
       {
         type: 'GENERAL',
         professionalId: 4,
         patientId: 5,
         date: DateTime.local().plus({ days: Number(faker.random.numeric(2)) }),
-        status: 'DONE',
+        status: 'CONFIRMED',
       },
       {
         type: 'GENERAL',
         professionalId: 4,
         patientId: 5,
         date: DateTime.local().plus({ days: Number(faker.random.numeric(2)) }),
-        status: 'CANCELED',
+        status: 'CONFIRMED',
       },
     ])
   }

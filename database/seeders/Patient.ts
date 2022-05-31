@@ -1,96 +1,28 @@
 import { faker } from '@faker-js/faker'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Patient from 'App/Models/Patient'
+import PatientFactory from 'Database/factories/PatientFactory'
 import { DateTime } from 'luxon'
 
 export default class PatientSeeder extends BaseSeeder {
   public async run() {
     const uniqueKey = 'socialNumber'
 
-    await Patient.updateOrCreateMany(uniqueKey, [
+    const patients = await PatientFactory.merge([
       {
-        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
-        socialNumber: faker.datatype.number({ min: 6 }),
-        birthday: DateTime.local().minus({ years: 20 }),
-        gender: faker.name.gender(),
-        contact: faker.phone.phoneNumber(),
-        zipcode: faker.address.zipCode(),
-        street: faker.address.streetName(),
-        number: Number(faker.address.buildingNumber()),
-        county: faker.address.county(),
-        city: faker.address.cityName(),
-        state: faker.address.state(),
-        country: faker.address.country(),
-        active: true,
+        healthPlanId: 1,
+        healthPlanExpiration: DateTime.fromISO(faker.date.future(1).toISOString()),
       },
       {
-        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
-        socialNumber: faker.datatype.number({ min: 6 }),
-        birthday: DateTime.local().minus({ years: 15 }),
-        gender: faker.name.gender(),
-        contact: faker.phone.phoneNumber(),
-        zipcode: faker.address.zipCode(),
-        street: faker.address.streetName(),
-        number: Number(faker.address.buildingNumber()),
-        county: faker.address.county(),
-        city: faker.address.cityName(),
-        state: faker.address.state(),
-        country: faker.address.country(),
-        healthPlanId: 5,
-        healthPlanExpiration: DateTime.local().plus({ years: 1 }),
-        active: true,
+        healthPlanId: 2,
+        healthPlanExpiration: DateTime.fromISO(faker.date.future(2).toISOString()),
       },
       {
-        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
-        socialNumber: faker.datatype.number({ min: 6 }),
-        birthday: DateTime.local().minus({ years: 10 }),
-        gender: faker.name.gender(),
-        contact: faker.phone.phoneNumber(),
-        zipcode: faker.address.zipCode(),
-        street: faker.address.streetName(),
-        number: Number(faker.address.buildingNumber()),
-        county: faker.address.county(),
-        city: faker.address.cityName(),
-        state: faker.address.state(),
-        country: faker.address.country(),
-        healthPlanId: 8,
-        healthPlanExpiration: DateTime.local().plus({ years: 2 }),
-        active: true,
+        healthPlanId: 3,
+        healthPlanExpiration: DateTime.fromISO(faker.date.future(3).toISOString()),
       },
-      {
-        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
-        socialNumber: faker.datatype.number({ min: 6 }),
-        birthday: DateTime.local().minus({ years: 10 }),
-        gender: faker.name.gender(),
-        contact: faker.phone.phoneNumber(),
-        zipcode: faker.address.zipCode(),
-        street: faker.address.streetName(),
-        number: Number(faker.address.buildingNumber()),
-        county: faker.address.county(),
-        city: faker.address.cityName(),
-        state: faker.address.state(),
-        country: faker.address.country(),
-        healthPlanId: 8,
-        healthPlanExpiration: DateTime.local().plus({ years: 2 }),
-        active: true,
-      },
-      {
-        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
-        socialNumber: faker.datatype.number({ min: 6 }),
-        birthday: DateTime.local().minus({ years: 10 }),
-        gender: faker.name.gender(),
-        contact: faker.phone.phoneNumber(),
-        zipcode: faker.address.zipCode(),
-        street: faker.address.streetName(),
-        number: Number(faker.address.buildingNumber()),
-        county: faker.address.county(),
-        city: faker.address.cityName(),
-        state: faker.address.state(),
-        country: faker.address.country(),
-        healthPlanId: 8,
-        healthPlanExpiration: DateTime.local().plus({ years: 2 }),
-        active: true,
-      },
-    ])
+    ]).createMany(6)
+
+    await Patient.updateOrCreateMany(uniqueKey, patients)
   }
 }

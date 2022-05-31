@@ -1,66 +1,32 @@
-import { faker } from '@faker-js/faker'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Professional from 'App/Models/Professional'
+import ProfessionalFactory from 'Database/factories/ProfessionalFactory'
 
 export default class ProfessionalSeeder extends BaseSeeder {
   public async run() {
     const uniqueKey = 'email'
 
-    await Professional.updateOrCreateMany(uniqueKey, [
-      {
-        role: 'NURSE',
-        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
-        registrationNumber: faker.datatype.number({ min: 6 }),
-        registrationState: faker.address.stateAbbr(),
-        specialty: faker.name.jobType(),
-        email: 'nurse-one@emed.com',
-        password: '1234567Aa!',
-        active: true,
-      },
-      {
-        role: 'NURSE',
-        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
-        registrationNumber: faker.datatype.number({ min: 6 }),
-        registrationState: faker.address.stateAbbr(),
-        specialty: faker.name.jobType(),
-        email: 'nurse-two@emed.com',
-        password: '1234567Aa!',
-        active: false,
-      },
-      {
-        role: 'DOCTOR',
-        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
-        registrationNumber: faker.datatype.number({ min: 6 }),
-        registrationState: faker.address.stateAbbr(),
-        specialty: faker.name.jobType(),
-        email: 'doctor-one@emed.com',
-        password: '1234567Aa!',
-        active: true,
-      },
-      {
-        role: 'DOCTOR',
-        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
-        registrationNumber: faker.datatype.number({ min: 6 }),
-        registrationState: faker.address.stateAbbr(),
-        specialty: faker.name.jobType(),
-        email: 'doctor-two@emed.com',
-        password: '1234567Aa!',
-        active: false,
-      },
+    const professionals = await ProfessionalFactory.merge([
+      { email: 'doctor1@emed.com' },
+      { email: 'doctor2@emed.com' },
+      { role: 'NURSE', email: 'nurse1@emed.com' },
+      { role: 'NURSE', email: 'nurse2@emed.com' },
       {
         role: 'ADMIN',
-        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
         email: 'admin@emed.com',
-        password: '1234567Aa!',
-        active: true,
+        registrationNumber: undefined,
+        registrationState: undefined,
+        specialty: undefined,
       },
       {
         role: 'RECEPTIONIST',
-        name: faker.fake('{{name.firstName}} {{name.lastName}}'),
         email: 'contact@emed.com',
-        password: '1234567Aa!',
-        active: true,
+        registrationNumber: undefined,
+        registrationState: undefined,
+        specialty: undefined,
       },
-    ])
+    ]).createMany(6)
+
+    await Professional.updateOrCreateMany(uniqueKey, professionals)
   }
 }

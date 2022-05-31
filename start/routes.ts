@@ -66,9 +66,8 @@ Route.group(() => {
   Route.group(() => {
     Route.get(':id', 'MedicalRecordsController.show')
     Route.get(':attendanceId', 'MedicalRecordsController.showByAttendanceId')
-    Route.post('', 'MedicalRecordsController.create')
     Route.put(':id', 'MedicalRecordsController.update')
-  }).prefix('registers')
+  }).prefix('records')
 
   /**
    * Prescriptions

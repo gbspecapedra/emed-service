@@ -1,6 +1,4 @@
 import MedicalRecord from 'App/Models/MedicalRecord'
-import CreateMedicalRecordValidator from 'App/Validators/CreateMedicalRecordValidator'
-
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 export default class MedicalRecordsController {
   public async show({ request }: HttpContextContract) {
@@ -13,22 +11,16 @@ export default class MedicalRecordsController {
     return await MedicalRecord.findOrFail(attendanceId)
   }
 
-  public async create({ request, response }: HttpContextContract) {
-    try {
-      const register = await request.validate(CreateMedicalRecordValidator)
-
-      return await MedicalRecord.create({ ...register })
-    } catch (error) {
-      response.badRequest(error)
-    }
-  }
-
   public async update({ request, response }: HttpContextContract) {
     try {
-      const { id, ...register } = request.all()
+      const { id, medicineIds, examIds, ...register } = request.all()
 
       const registerExists = await MedicalRecord.find(id)
       if (!registerExists) return response.notFound({ error: 'Medical Record not found.' })
+
+      if (medicineIds.length > 0) await registerExists.related('medicines').sync(medicineIds, false)
+
+      if (examIds.length > 0) await registerExists.related('exams').sync(examIds, false)
 
       return await registerExists.merge(register).save()
     } catch (error) {

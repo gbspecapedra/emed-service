@@ -1,4 +1,4 @@
-import { column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BelongsTo, belongsTo, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import AppBaseModel from './AppBaseModel'
 import MedicalRecord from './MedicalRecord'
@@ -18,6 +18,9 @@ export default class Attendance extends AppBaseModel {
 
   @column()
   public patientId: number
+
+  @column()
+  public medicalRecordId: number
 
   @column.dateTime()
   public date: DateTime
@@ -46,9 +49,6 @@ export default class Attendance extends AppBaseModel {
   })
   public professional: HasOne<typeof Professional>
 
-  @hasOne(() => MedicalRecord, {
-    localKey: 'id',
-    foreignKey: 'attendanceId',
-  })
-  public record: HasOne<typeof MedicalRecord>
+  @belongsTo(() => MedicalRecord)
+  public medicalRecord: BelongsTo<typeof MedicalRecord>
 }

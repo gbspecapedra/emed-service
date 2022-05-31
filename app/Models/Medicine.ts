@@ -22,6 +22,10 @@ export default class Medicine extends AppBaseModel {
   @column()
   public usage: string
 
-  @manyToMany(() => MedicalRecord)
+  @manyToMany(() => MedicalRecord, {
+    pivotTable: 'medical_record_medicine',
+    pivotForeignKey: 'medicine_id',
+    pivotRelatedForeignKey: 'medical_record_id',
+  })
   public medicalRecords: ManyToMany<typeof MedicalRecord>
 }

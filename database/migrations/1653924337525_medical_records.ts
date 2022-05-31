@@ -6,13 +6,13 @@ export default class MedicalRecords extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
-      table
-        .integer('attendance_id')
-        .unsigned()
-        .references('id')
-        .inTable('attendances')
-        .onDelete('CASCADE')
-      table.text('description', 'longtext').notNullable()
+      table.text('description', 'longtext').nullable()
+      table.integer('weight').unsigned().nullable()
+      table.integer('height').unsigned().nullable()
+      table.string('bmi').nullable()
+      table.integer('diastolicPressure').unsigned().nullable()
+      table.integer('systolicPressure').unsigned().nullable()
+      table.integer('temperature').unsigned().nullable()
       table.timestamp('created_at', { useTz: true }).notNullable()
       table.timestamp('updated_at', { useTz: true }).notNullable()
     })
