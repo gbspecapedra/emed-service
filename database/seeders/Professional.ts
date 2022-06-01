@@ -7,8 +7,8 @@ export default class ProfessionalSeeder extends BaseSeeder {
     const uniqueKey = 'email'
 
     const professionals = await ProfessionalFactory.merge([
-      { email: 'doctor1@emed.com' },
-      { email: 'doctor2@emed.com' },
+      { role: 'DOCTOR', email: 'doctor1@emed.com' },
+      { role: 'DOCTOR', email: 'doctor2@emed.com' },
       { role: 'NURSE', email: 'nurse1@emed.com' },
       { role: 'NURSE', email: 'nurse2@emed.com' },
       {

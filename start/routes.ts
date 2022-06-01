@@ -65,7 +65,6 @@ Route.group(() => {
    */
   Route.group(() => {
     Route.get(':id', 'MedicalRecordsController.show')
-    Route.get(':attendanceId', 'MedicalRecordsController.showByAttendanceId')
     Route.put(':id', 'MedicalRecordsController.update')
   }).prefix('records')
 

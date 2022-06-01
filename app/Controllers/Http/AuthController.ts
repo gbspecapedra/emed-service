@@ -1,8 +1,10 @@
 import { string } from '@ioc:Adonis/Core/Helpers'
 import Professional from 'App/Models/Professional'
 import ResetPasswordValidator from 'App/Validators/ResetPasswordValidator'
+import Env from '@ioc:Adonis/Core/Env'
 
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Mail from '@ioc:Adonis/Addons/Mail'
 export default class AuthController {
   public async login({ request, response, auth }: HttpContextContract) {
     try {
@@ -37,18 +39,15 @@ export default class AuthController {
 
       await user.merge({ password: newPassword }).save()
 
-      // await Mail.send((message) => {
-      //   message
-      //     .from("no-reply@emed.com")
-      //     .to("")
-      //     .subject("Resetting Your Password")
-      //     .htmlView("emails/reset", {
-      //       user: { fullName: "" },
-      //       url: "https://your-app.com/verification-url",
-      //     });
-      // });
+      await Mail.use('mailgun').send((message) => {
+        message
+          .from(`no-reply@${Env.get('MAILGUN_DOMAIN')}`)
+          .to(email)
+          .subject('eMED - Your password reset!')
+          .html(`<p> Your new password is: ${newPassword} </p>`)
+      })
 
-      return response.ok({ password: newPassword })
+      return response.ok({ password: true })
     } catch (error) {
       return response.internalServerError(error)
     }

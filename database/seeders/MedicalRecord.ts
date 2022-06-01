@@ -6,10 +6,24 @@ export default class MedicalRecordSeeder extends BaseSeeder {
   public async run() {
     await MedicalRecord.createMany([
       {
-        description: faker.lorem.text(),
+        description: undefined,
       },
       {
         description: faker.lorem.text(),
+        weight: 58,
+        height: 175,
+        diastolicPressure: 110,
+        systolicPressure: 115,
+        temperature: 34.5,
+      },
+      {
+        description: undefined,
+      },
+      {
+        description: undefined,
+      },
+      {
+        description: undefined,
       },
     ])
   }
