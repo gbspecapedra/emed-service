@@ -1,10 +1,7 @@
-import { string } from '@ioc:Adonis/Core/Helpers'
 import Professional from 'App/Models/Professional'
 import ResetPasswordValidator from 'App/Validators/ResetPasswordValidator'
-import Env from '@ioc:Adonis/Core/Env'
 
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Mail from '@ioc:Adonis/Addons/Mail'
 export default class AuthController {
   public async login({ request, response, auth }: HttpContextContract) {
     try {
@@ -28,24 +25,23 @@ export default class AuthController {
     }
   }
 
+  public async findUserByEmail({ request, response }: HttpContextContract) {
+    const { email } = await request.validate(ResetPasswordValidator)
+
+    const user = await Professional.findBy('email', email)
+    if (!user) return response.notFound({ error: 'Email not found or invalid.' })
+
+    return response.ok({ user: user })
+  }
+
   public async resetPassword({ request, response }: HttpContextContract) {
     try {
-      const { email } = await request.validate(ResetPasswordValidator)
+      const { email, password } = request.all()
 
       const user = await Professional.findBy('email', email)
       if (!user) return response.notFound({ error: 'User not found.' })
 
-      const newPassword = string.generateRandom(8)
-
-      await user.merge({ password: newPassword }).save()
-
-      await Mail.use('mailgun').send((message) => {
-        message
-          .from(`no-reply@${Env.get('MAILGUN_DOMAIN')}`)
-          .to(email)
-          .subject('eMED - Your password reset!')
-          .html(`<p> Your new password is: ${newPassword} </p>`)
-      })
+      await user.merge({ password: password }).save()
 
       return response.ok({ password: true })
     } catch (error) {

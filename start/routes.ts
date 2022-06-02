@@ -16,6 +16,7 @@ Route.get('/', ({ response }) => {
  */
 Route.group(() => {
   Route.post('/login', 'AuthController.login')
+  Route.post('/find', 'AuthController.findUserByEmail')
   Route.post('/reset', 'AuthController.resetPassword')
 })
 
