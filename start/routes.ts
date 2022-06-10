@@ -73,11 +73,7 @@ Route.group(() => {
    * Prescriptions
    */
   Route.group(() => {
-    Route.get('', 'PrescriptionsController.index')
-    Route.get(':id', 'PrescriptionsController.show')
-    Route.post('', 'PrescriptionsController.create')
     Route.put(':id', 'PrescriptionsController.update')
-    Route.delete(':id', 'PrescriptionsController.destroy')
   }).prefix('prescriptions')
 
   /**

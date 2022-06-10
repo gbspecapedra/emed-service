@@ -13,7 +13,9 @@ export default class AttendancesController {
     const { id } = request.params()
     return await Attendance.query()
       .preload('patient')
-      .preload('medicalRecord')
+      .preload('medicalRecord', (medicalRecordQuery) => {
+        medicalRecordQuery.preload('exams').preload('medicines')
+      })
       .where('id', '=', id)
       .first()
   }

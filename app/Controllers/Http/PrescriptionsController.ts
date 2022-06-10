@@ -1,48 +1,23 @@
-import Prescription from 'App/Models/Prescription'
-import CreatePrescriptionValidator from 'App/Validators/CreatePrescriptionValidator'
-
+import { types } from '@ioc:Adonis/Core/Helpers'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import MedicalRecord from 'App/Models/MedicalRecord'
+
 export default class PrescriptionsController {
-  public async index() {
-    return await Prescription.all()
-  }
-
-  public async show({ request }: HttpContextContract) {
-    const { id } = request.params()
-    return await Prescription.findOrFail(id)
-  }
-
-  public async create({ request, response }: HttpContextContract) {
-    try {
-      const prescription = await request.validate(CreatePrescriptionValidator)
-
-      return await Prescription.create({ ...prescription })
-    } catch (error) {
-      response.badRequest(error)
-    }
-  }
-
   public async update({ request, response }: HttpContextContract) {
     try {
-      const { id, ...prescription } = request.all()
+      const { id, examIds, medicineIds } = request.all()
 
-      const prescriptionExists = await Prescription.find(id)
-      if (!prescriptionExists) return response.notFound({ error: 'Prescription not found.' })
+      const registerExists = await MedicalRecord.find(id)
+      if (!registerExists) return response.notFound({ error: 'Medical Record not found.' })
 
-      return await prescriptionExists.merge(prescription).save()
-    } catch (error) {
-      response.internalServerError(error)
-    }
-  }
+      if (types.isArray(examIds)) await registerExists.related('exams').sync(examIds, false)
 
-  public async destroy({ request, response }: HttpContextContract) {
-    try {
-      const { id } = request.params()
+      if (types.isArray(medicineIds))
+        await registerExists.related('medicines').sync(medicineIds, false)
 
-      const prescriptionExists = await Prescription.find(id)
-      if (!prescriptionExists) return response.notFound({ error: 'Prescription not found.' })
-
-      return await prescriptionExists.delete()
+      return response.ok({
+        medicalRecord: registerExists.toJSON(),
+      })
     } catch (error) {
       response.internalServerError(error)
     }
