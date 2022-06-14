@@ -106,4 +106,12 @@ Route.group(() => {
   Route.group(() => {
     Route.get('', 'SpecialtiesController.index')
   }).prefix('specialties')
+
+  /**
+   * Reports
+   */
+  Route.group(() => {
+    Route.get('type', 'ReportsController.getAttendanceType')
+    Route.get('status', 'ReportsController.getAttendanceStatus')
+  }).prefix('reports')
 }).middleware('auth')
