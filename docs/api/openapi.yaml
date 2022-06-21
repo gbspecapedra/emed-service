@@ -1,0 +1,441 @@
+openapi: 3.0.0
+info:
+  title: eMED // swagger docs
+  description: OpenAPI Specification to eMED RESTful API
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/gisabernardess/emed/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: auth
+- name: professional
+paths:
+  /login:
+    post:
+      tags:
+      - auth
+      summary: authenticates a user
+      operationId: loginPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/login_body'
+      responses:
+        "200":
+          description: login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: user not found
+        "500":
+          description: server error
+      x-swagger-router-controller: Auth
+  /reset:
+    post:
+      tags:
+      - auth
+      summary: reset a user's password
+      operationId: resetPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/reset_body'
+      responses:
+        "200":
+          description: password updated
+        "404":
+          description: user not found
+        "500":
+          description: server error
+      x-swagger-router-controller: Auth
+  /logout:
+    post:
+      tags:
+      - auth
+      summary: revokes a logged user's token
+      operationId: logoutPOST
+      responses:
+        "200":
+          description: logout successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+      security:
+      - authorization: []
+      x-swagger-router-controller: Auth
+  /professionals:
+    get:
+      tags:
+      - professional
+      summary: list all professionals
+      description: this can only be done by the logged user
+      operationId: professionalsGET
+      responses:
+        "200":
+          description: professionals listed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+        "401":
+          description: unauthorized access
+      security:
+      - authorization: []
+      x-swagger-router-controller: Professional
+    post:
+      tags:
+      - professional
+      summary: creates a professional
+      description: this can only be done by the logged user
+      operationId: professionalsPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/professionals_body'
+      responses:
+        "201":
+          description: user created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Professional'
+        "400":
+          description: validation fails
+        "401":
+          description: unauthorized access
+      security:
+      - authorization: []
+      x-swagger-router-controller: Professional
+  /professionals/{id}:
+    get:
+      tags:
+      - professional
+      summary: finds a professional by id
+      description: this can only be done by the logged user
+      operationId: professionalsIdGET
+      parameters:
+      - name: id
+        in: path
+        description: professional's ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: professional exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Professional'
+        "401":
+          description: unauthorized access
+        "404":
+          description: user not found
+      security:
+      - authorization: []
+      x-swagger-router-controller: Professional
+    put:
+      tags:
+      - professional
+      summary: updates an existing professional by id
+      description: this can only be done by the logged user
+      operationId: professionalsIdPUT
+      parameters:
+      - name: id
+        in: path
+        description: professional's ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/professionals_id_body'
+      responses:
+        "200":
+          description: user updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Professional'
+        "400":
+          description: validation fails
+        "401":
+          description: unauthorized access
+        "404":
+          description: professional not found
+        "500":
+          description: server error
+      security:
+      - authorization: []
+      x-swagger-router-controller: Professional
+    delete:
+      tags:
+      - professional
+      summary: deletes an existing professional by id
+      description: this can only be done by the logged user
+      operationId: professionalsIdDELETE
+      parameters:
+      - name: id
+        in: path
+        description: professional's ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: professional deleted
+        "401":
+          description: unauthorized access
+        "404":
+          description: professional not found
+        "500":
+          description: server error
+      security:
+      - authorization: []
+      x-swagger-router-controller: Professional
+components:
+  schemas:
+    Professional:
+      required:
+      - active
+      - createdAt
+      - email
+      - id
+      - name
+      - password
+      - registrationNumber
+      - registrationState
+      - specialty
+      - type
+      - updatedAt
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+          enum:
+          - DOCTOR
+          - NURSE
+          - ADMIN
+        name:
+          type: string
+        registrationNumber:
+          type: integer
+          format: int64
+        registrationState:
+          type: string
+        specialty:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+          format: password
+        rememberMeToken:
+          type: string
+        active:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      description: Representation of a professional
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        specialty: specialty
+        password: ""
+        rememberMeToken: rememberMeToken
+        registrationNumber: 6
+        name: name
+        active: true
+        id: 0
+        type: DOCTOR
+        registrationState: registrationState
+        email: email
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+    ApiToken:
+      required:
+      - createdAt
+      - id
+      - name
+      - professionalId
+      - token
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        professionalId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          type: string
+        token:
+          type: string
+          format: byte
+        expiresAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+      description: Representation of the Opaque Access Token to authenticate the user
+        requests
+    login_body:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+          example: email@domain.com
+        password:
+          type: string
+          format: password
+    inline_response_200:
+      type: object
+      properties:
+        type:
+          type: string
+          format: byte
+        token:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+      example:
+        expires_at: 2000-01-23T04:56:07.000+00:00
+        type: ""
+        token: token
+    reset_body:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+          example: email@domain.com
+    inline_response_200_1:
+      type: object
+      properties:
+        revoked:
+          type: boolean
+      example:
+        revoked: true
+    inline_response_200_2:
+      type: object
+      properties:
+        professionals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Professional'
+      example:
+        professionals:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          specialty: specialty
+          password: ""
+          rememberMeToken: rememberMeToken
+          registrationNumber: 6
+          name: name
+          active: true
+          id: 0
+          type: DOCTOR
+          registrationState: registrationState
+          email: email
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          specialty: specialty
+          password: ""
+          rememberMeToken: rememberMeToken
+          registrationNumber: 6
+          name: name
+          active: true
+          id: 0
+          type: DOCTOR
+          registrationState: registrationState
+          email: email
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+    professionals_body:
+      required:
+      - email
+      - name
+      - registrationNumber
+      - registrationState
+      - specialty
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - DOCTOR
+          - NURSE
+          - ADMIN
+        name:
+          type: string
+          example: Jane Doe
+        registrationNumber:
+          type: number
+        registrationState:
+          type: string
+          example: UF
+        specialty:
+          type: string
+          example: Clínico Geral
+        email:
+          type: string
+          example: email@domain.com
+    professionals_id_body:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - DOCTOR
+          - NURSE
+          - ADMIN
+        name:
+          type: string
+          example: Jane Doe
+        specialty:
+          type: string
+          example: Clínico Geral
+        email:
+          type: string
+          example: email@domain.com
+        oldPassword:
+          type: string
+          format: password
+        password:
+          type: string
+          format: password
+  securitySchemes:
+    authorization:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
