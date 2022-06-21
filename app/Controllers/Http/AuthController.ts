@@ -43,7 +43,7 @@ export default class AuthController {
 
       await user.merge({ password: password }).save()
 
-      return response.ok({ password: true })
+      return response.ok({ updated: true })
     } catch (error) {
       return response.internalServerError(error)
     }
