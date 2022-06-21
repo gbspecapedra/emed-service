@@ -1,4 +1,4 @@
-import { BelongsTo, belongsTo, column, HasMany, hasMany, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import AppBaseModel from './AppBaseModel'
 
