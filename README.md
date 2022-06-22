@@ -14,7 +14,7 @@
 <p align="center">
   <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-project-specification">API Documentation</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-api-documentation">API Documentation</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-how-to-use">How To Use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-license">License</a>&nbsp;
 </p>
@@ -68,7 +68,7 @@ $ yarn reset-db
 [OpenAPI Specification](https://app.swaggerhub.com/apis/gisabernardess/emed/1.0.0) to eMED RESTful API.
 
 ### Class Diagram
-![emed-class-diagram](https://user-images.githubusercontent.com/17882257/168187472-2d292a60-895e-4fb6-b9ba-d4b5c8a4bf10.png)
+![emed-class-diagram](https://user-images.githubusercontent.com/17882257/175023248-2d8b51f5-26ae-45ac-a80b-46f6fd6aa56d.png)
 
 ## 📝 License
 
